@@ -8,7 +8,7 @@ public class SecretSanta {
     private static final String SENDER_PASSWORD = "your_password";
 
     public static void main(String[] args) {
-    	//user input using scanner 
+        //user input using scanner 
         Scanner scanner = new Scanner(System.in);
         
         //list that stores participant names 
@@ -42,11 +42,18 @@ public class SecretSanta {
                 i = -1; //start check again from beginning 
             }
         }
-        // send participant email with there assigned person 
-        System.out.println("Sending Secret Santa assignments via email...");
+        
+        // Display assignments before sending emails
+        System.out.println("\nSecret Santa Assignments:");
+        for (int i = 0; i < participants.size(); i++) {
+            System.out.println(participants.get(i) + " -> " + receivers.get(i));
+        }
+
+        // send participant email with their assigned person 
+        System.out.println("\nSending Secret Santa assignments via email...");
         for (int i = 0; i < participants.size(); i++) { 
             String sender = participants.get(i); //participant giving the gift
-            String receiver = receivers.get(i); // participant receiving gift 
+            String receiver = receivers.get(i); //participant receiving gift 
             String email = emailMap.get(sender); //sender email 
             sendEmail(email, sender, receiver); //send email 
             System.out.println("Email sent to: " + sender + " (" + email + ")");
@@ -57,7 +64,7 @@ public class SecretSanta {
 
     //sends secret santa email to participant 
     private static void sendEmail(String recipientEmail, String senderName, String receiverName) {
-    	// SMTP properties set up to send email 
+        // SMTP properties set up to send email 
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
@@ -73,8 +80,8 @@ public class SecretSanta {
         });
 
         try {
-        	
-        	//new email message is created
+            
+            //new email message is created
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(SENDER_EMAIL));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
@@ -82,11 +89,11 @@ public class SecretSanta {
             
             //email that is sent to the participant on who they have 
             message.setText(
-            	    "Hello " + senderName + ",\n\n" +
-            	    "You have been assigned to give a gift to: " + receiverName + ".\n\n" +
-            	    "Merry Christmas and Happy gifting!\n" +
-            	    "Secret Santa Organizer"
-            	);
+                "Hello " + senderName + ",\n\n" +
+                "You have been assigned to give a gift to: " + receiverName + ".\n\n" +
+                "Merry Christmas and Happy gifting!\n" +
+                "Secret Santa Organizer"
+            );
 
             //send message 
             Transport.send(message);
@@ -96,3 +103,4 @@ public class SecretSanta {
         }
     }
 }
+
