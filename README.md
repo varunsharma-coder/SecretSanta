@@ -1,11 +1,23 @@
-#Secret Santa
+#Secret Santa Assignment
 
-A Java console app that is designed to be used for Secret Santa pairing and email assignments through SMTP.
+A Java GUI app that is designed to be used for Secret Santa pairing and email assignments through SMTP.
 
 ##Features
-- Input the participant names and emails.
+- Input the participant names and emails directly into the GUI.
 - Random assignment (no self-assignment is involved in the process).
-- Notfies Email app regarding the person you have for secret santa.
+- Send emails through the SMTP provider that you choose.
+
+  ##What Was Used
+  - Java Swing, AWT
+  - JavaMail API
+  - OOP (Participant, GUI, EmailSender classes)
 
 ##Usage
-Update `SENDER_EMAIL` and `SENDER_PASSWORD` in `SecretSanta.java` before running it. 
+Run the program through: 
+javac *.java
+java SecretSantaGUI 
+
+- Add all participants names and emails. 
+- Click "Assign Secret Santa's).
+- Enter SMTP information when asked. 
+- Emails sent to participants with there assigned partner listed.
